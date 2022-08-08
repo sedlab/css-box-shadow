@@ -11,6 +11,8 @@ const boxShadowParse = (string) => string.split(/\s(?![^(]*\))/).map((v) => pars
 const getColor = (values) => values.find((v) => !isFinite(+v));
 const cssBoxShadow = (stringBoxShadows) => {
     try {
+        if (typeof stringBoxShadows !== "string")
+            throw new Error("Недопустимый формат box-shadow.");
         return stringBoxShadows.split(/,(?![^\(]*\))/).map(stringBoxShadow => {
             const inset = stringBoxShadow.includes("inset");
             stringBoxShadow = stringBoxShadow.replace("inset", "").trim();
@@ -21,7 +23,7 @@ const cssBoxShadow = (stringBoxShadows) => {
         });
     }
     catch (err) {
-        console.error("lib hexToRgb: ", err);
+        // console.error("lib cssBoxShadow: ", err);
         return undefined;
     }
 };

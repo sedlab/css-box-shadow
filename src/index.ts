@@ -14,6 +14,7 @@ const getColor = (values: TGetColorValue): TGetColor => values.find((v: string |
 
 export const cssBoxShadow = (stringBoxShadows: TCssBoxShadowValue): TCssBoxShadow => {
     try {
+        if (typeof stringBoxShadows !== "string") throw new Error("Недопустимый формат box-shadow.");
         return stringBoxShadows.split(/,(?![^\(]*\))/).map(stringBoxShadow => {
             const inset = stringBoxShadow.includes("inset");
             stringBoxShadow = stringBoxShadow.replace("inset", "").trim();
@@ -23,7 +24,7 @@ export const cssBoxShadow = (stringBoxShadows: TCssBoxShadowValue): TCssBoxShado
             return { inset, x, y, blur, spread, color };
         });
     } catch (err) {
-        console.error("lib hexToRgb: ", err);
+        // console.error("lib cssBoxShadow: ", err);
         return undefined;
     }
 }
