@@ -9,12 +9,20 @@ const parseUnit = (v) => {
 };
 const boxShadowParse = (string) => string.split(/\s(?![^(]*\))/).map((v) => parseUnit(v));
 const getColor = (values) => values.find((v) => !isFinite(+v));
-const cssBoxShadow = (stringBoxShadows) => stringBoxShadows.split(/,(?![^\(]*\))/).map(stringBoxShadow => {
-    const inset = stringBoxShadow.includes("inset");
-    stringBoxShadow = stringBoxShadow.replace("inset", "").trim();
-    const valuesParsed = boxShadowParse(stringBoxShadow);
-    const color = getColor(valuesParsed);
-    const [x, y, blur, spread] = valuesParsed.filter((v) => v !== color);
-    return { inset, x, y, blur, spread, color };
-});
+const cssBoxShadow = (stringBoxShadows) => {
+    try {
+        return stringBoxShadows.split(/,(?![^\(]*\))/).map(stringBoxShadow => {
+            const inset = stringBoxShadow.includes("inset");
+            stringBoxShadow = stringBoxShadow.replace("inset", "").trim();
+            const valuesParsed = boxShadowParse(stringBoxShadow);
+            const color = getColor(valuesParsed);
+            const [x, y, blur, spread] = valuesParsed.filter((v) => v !== color);
+            return { inset, x, y, blur, spread, color };
+        });
+    }
+    catch (err) {
+        console.error("lib hexToRgb: ", err);
+        return undefined;
+    }
+};
 exports.cssBoxShadow = cssBoxShadow;

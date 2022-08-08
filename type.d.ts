@@ -7,11 +7,11 @@ export declare type TBoxShadowParse = Array<string | number>;
 export declare type TGetColorValue = Array<string | number>;
 export declare type TGetColor = string | number | undefined;
 export declare type TCssBoxShadowValue = string;
-export declare type TCssBoxShadow = {
+export declare type TCssBoxShadow = Array<{
     inset: boolean;
     x: string | number;
     y: string | number;
     blur: string | number;
     spread: string | number;
     color: TGetColor;
-};
+}> | undefined;
