@@ -1,7 +1,7 @@
 import { cssBoxShadow } from "./index";
 import { TCssBoxShadow } from "./type";
 
-const stringify = (obj: Array<TCssBoxShadow>, space: number = 4) => JSON.stringify(obj, function replacer(key, value) {
+const stringify = (obj: TCssBoxShadow) => JSON.stringify(obj, function replacer(key, value) {
     if (value === undefined) return null;
     return value;
 });

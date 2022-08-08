@@ -12,11 +12,18 @@ const boxShadowParse = (string: TBoxShadowParseValue): TBoxShadowParse => string
 
 const getColor = (values: TGetColorValue): TGetColor => values.find((v: string | number) => !isFinite(+v));
 
-export const cssBoxShadow = (stringBoxShadows: TCssBoxShadowValue): Array<TCssBoxShadow> => stringBoxShadows.split(/,(?![^\(]*\))/).map(stringBoxShadow => {
-    const inset = stringBoxShadow.includes("inset");
-    stringBoxShadow = stringBoxShadow.replace("inset", "").trim();
-    const valuesParsed = boxShadowParse(stringBoxShadow);
-    const color = getColor(valuesParsed);
-    const [x, y, blur, spread] = valuesParsed.filter((v: string | number) => v !== color);
-    return { inset, x, y, blur, spread, color };
-});
+export const cssBoxShadow = (stringBoxShadows: TCssBoxShadowValue): TCssBoxShadow => {
+    try {
+        return stringBoxShadows.split(/,(?![^\(]*\))/).map(stringBoxShadow => {
+            const inset = stringBoxShadow.includes("inset");
+            stringBoxShadow = stringBoxShadow.replace("inset", "").trim();
+            const valuesParsed = boxShadowParse(stringBoxShadow);
+            const color = getColor(valuesParsed);
+            const [x, y, blur, spread] = valuesParsed.filter((v: string | number) => v !== color);
+            return { inset, x, y, blur, spread, color };
+        });
+    } catch (err) {
+        console.error("lib hexToRgb: ", err);
+        return undefined;
+    }
+}
