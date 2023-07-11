@@ -13,7 +13,6 @@
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.2",
     "@types/node": "^20.3.3",
-    "@types/stylis": "^4.2.0",
     "cross-env": "latest",
     "esbuild": "^0.18.11",
     "rollup": "^3.26.0",
