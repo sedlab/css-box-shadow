@@ -8,10 +8,10 @@ export type TGetColorValue = Array<string | number>;
 export type TGetColor = string | number | undefined;
 export type TCssBoxShadowValue = string;
 export type TCssBoxShadow = Array<{
-    inset: boolean;
-    x: string | number;
-    y: string | number;
-    blur: string | number;
-    spread: string | number;
-    color: TGetColor;
+  inset: boolean;
+  x: string | number;
+  y: string | number;
+  blur: string | number;
+  spread: string | number;
+  color: TGetColor;
 }> | undefined;
