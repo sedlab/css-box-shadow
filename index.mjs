@@ -1,5 +1,3 @@
-'use strict';
-
 const toNumber = (v) => isFinite(+v) ? +v : v;
 const parseUnit = (v) => {
   const match = v.match(/^(0?[-.]?\d+)(r?e[m|x]|v[h|w|min|max]+|p[x|t|c]|[c|m]m|%|s|in|ch)$/);
@@ -25,4 +23,4 @@ const cssBoxShadow = (stringBoxShadows) => {
   }
 };
 
-exports.cssBoxShadow = cssBoxShadow;
+export { cssBoxShadow };
